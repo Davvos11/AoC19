@@ -19,6 +19,22 @@ public class partOne {
         ADD, MULTIPLY
     }
 
+    public int[] initMemory(File input) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(input));
+        String seq = br.readLine();
+        br.close();
+
+        String[] seqsString = seq.split(",");
+        int[] seqs = new int[seqsString.length+3];
+        int j = 0;
+        for (String sString : seqsString) {
+            seqs[j] = Integer.parseInt(sString);
+            j++;
+        }
+
+        return seqs;
+    }
+
     public void computer(int[] seqs){
         State state = State.OPCODE;
         Action action = null;
@@ -75,17 +91,7 @@ public class partOne {
 
         URL url = partOne.class.getResource("input");
         File input = new File(url.getPath());
-        BufferedReader br = new BufferedReader(new FileReader(input));
-        String seq = br.readLine();
-        br.close();
-
-        String[] seqsString = seq.split(",");
-        int[] seqs = new int[seqsString.length+3];
-        int j = 0;
-        for (String sString : seqsString) {
-            seqs[j] = Integer.parseInt(sString);
-            j++;
-        }
+        int[] seqs = p.initMemory(input);
 
         seqs[1]=12;
         seqs[2]=2;
@@ -93,16 +99,5 @@ public class partOne {
         p.computer(seqs);
 
         System.out.println("\n\n"+seqs[0]);
-
-        BufferedWriter bw = new BufferedWriter(new FileWriter("src/day02/output"));
-        Boolean fst = true;
-        for (int s : seqs) {
-            if (!fst){
-                bw.append(",");
-            }
-            fst = false;
-            bw.append(String.valueOf(s));
-        }
-        bw.close();
     }
 }
