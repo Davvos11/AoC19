@@ -34,6 +34,9 @@ public class partOne {
             j++;
         }
 
+        seqs[1]=12;
+        seqs[2]=2;
+
         State state = State.OPCODE;
         Action action = null;
 
@@ -82,6 +85,8 @@ public class partOne {
             }
             
         }
+
+        System.out.println("\n\n"+seqs[0]);
 
         BufferedWriter bw = new BufferedWriter(new FileWriter("src/day02/output"));
         Boolean fst = true;
