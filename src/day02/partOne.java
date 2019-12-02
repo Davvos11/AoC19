@@ -19,24 +19,7 @@ public class partOne {
         ADD, MULTIPLY
     }
 
-    public static void main(String[] args) throws IOException {
-        URL url = partOne.class.getResource("input");
-        File input = new File(url.getPath());
-        BufferedReader br = new BufferedReader(new FileReader(input));
-        String seq = br.readLine();
-        br.close();
-
-        String[] seqsString = seq.split(",");
-        int[] seqs = new int[seqsString.length+3];
-        int j = 0;
-        for (String sString : seqsString) {
-            seqs[j] = Integer.parseInt(sString);
-            j++;
-        }
-
-        seqs[1]=12;
-        seqs[2]=2;
-
+    public void computer(int[] seqs){
         State state = State.OPCODE;
         Action action = null;
 
@@ -83,8 +66,31 @@ public class partOne {
                     state = State.OPCODE;
                     break;
             }
-            
+
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        partOne p = new partOne();
+
+        URL url = partOne.class.getResource("input");
+        File input = new File(url.getPath());
+        BufferedReader br = new BufferedReader(new FileReader(input));
+        String seq = br.readLine();
+        br.close();
+
+        String[] seqsString = seq.split(",");
+        int[] seqs = new int[seqsString.length+3];
+        int j = 0;
+        for (String sString : seqsString) {
+            seqs[j] = Integer.parseInt(sString);
+            j++;
+        }
+
+        seqs[1]=12;
+        seqs[2]=2;
+
+        p.computer(seqs);
 
         System.out.println("\n\n"+seqs[0]);
 
