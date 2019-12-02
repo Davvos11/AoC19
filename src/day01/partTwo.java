@@ -8,7 +8,9 @@ import java.net.URL;
 
 public class partTwo {
     public static void main(String[] args) throws IOException {
-        URL url = partTwo.class.getResource("input");
+        partTwo p = new partTwo();
+
+        URL url = partOne.class.getResource("input");
         File input = new File(url.getPath());
         BufferedReader br = new BufferedReader(new FileReader(input));
         String line;
@@ -17,11 +19,21 @@ public class partTwo {
 
         while ((line = br.readLine()) != null){
             int mass = Integer.parseInt(line);
-            int fuel = Math.floorDiv(mass,3)-2;
+            int fuel = p.fuelRequired(mass);
 
             fuelSum += fuel;
         }
 
         System.out.println(fuelSum);
+    }
+
+    private int fuelRequired(int mass){
+        int required = Math.floorDiv(mass,3)-2;
+        if (required > 0){
+            return required+fuelRequired(required);
+        }
+        else {
+            return 0;
+        }
     }
 }
