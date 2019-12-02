@@ -2,6 +2,7 @@ package day02;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -14,10 +15,16 @@ public class partOne {
         ADD, MULTIPLY
     }
 
-    public int[] initMemory(File input) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(input));
-        String seq = br.readLine();
-        br.close();
+    public int[] initMemory(File input)  {
+        String seq = "";
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(input));
+            seq = br.readLine();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         String[] seqsString = seq.split(",");
         int[] seqs = new int[seqsString.length+3];
@@ -81,7 +88,7 @@ public class partOne {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         partOne p = new partOne();
 
         URL url = partOne.class.getResource("input");
