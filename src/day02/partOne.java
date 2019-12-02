@@ -2,7 +2,6 @@ package day02;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -38,30 +37,34 @@ public class partOne {
     }
 
     public void computer(int[] seqs){
+        computer(seqs, false);
+    }
+
+    public void computer(int[] seqs, Boolean print){
         State state = State.OPCODE;
         Action action = null;
 
         for (int i = 0; i < seqs.length; i++) {
             switch (state){
                 case OPCODE:
-                    System.out.print("["+i+"]");
+                    if (print) { System.out.print("["+i+"]");}
                     switch (seqs[i]) {
                         case 99:
-                            System.out.print("Opcode 99: exit ");
+                            if (print) { System.out.print("Opcode 99: exit ");}
                             i = seqs.length;
                             break;
                         case 1:
-                            System.out.print("Opcode 1: add ");
+                            if (print) { System.out.print("Opcode 1: add ");}
                             action = Action.ADD;
                             state = State.DO;
                             break;
                         case 2:
-                            System.out.print("Opcode 2: multiply ");
+                            if (print) { System.out.print("Opcode 2: multiply ");}
                             action = Action.MULTIPLY;
                             state = State.DO;
                             break;
                         default:
-                            System.out.print("Opcode " + seqs[i] + ": ERROR");
+                            if (print) { System.out.print("Opcode " + seqs[i] + ": ERROR");}
                             break;
                     }
                     break;
@@ -71,7 +74,7 @@ public class partOne {
                     int in2 = seqs[i+1];
                     int in2Val = seqs[in2];
                     int out = seqs[i+2];
-                    System.out.println(in1+"="+in1Val+" and "+in2+"="+in2Val+", store in "+out);
+                    if (print) { System.out.println(in1+"="+in1Val+" and "+in2+"="+in2Val+", store in "+out);}
                     switch (action){
                         case ADD:
                             seqs[out] = in1Val+in2Val;
