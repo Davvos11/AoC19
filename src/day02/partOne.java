@@ -50,7 +50,7 @@ public class partOne {
                     if (print) { System.out.print("["+i+"]");}
                     switch (seqs[i]) {
                         case 99:
-                            if (print) { System.out.print("Opcode 99: exit ");}
+                            if (print) { System.out.print("Opcode 99: exit\n");}
                             i = seqs.length;
                             break;
                         case 1:

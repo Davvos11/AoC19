@@ -17,6 +17,7 @@ public class partTwo {
 
         p.computer(seqs);
 
+        System.out.println(noun+" and "+verb+" gives "+seqs[0]);
         return seqs[0];
     }
 
@@ -38,7 +39,7 @@ public class partTwo {
             System.out.println("Not found");
         }
         else {
-            System.out.println(noun+","+verb/**/);
+            System.out.println("100 * "+noun+" + "+verb+" = "+(100*noun+verb));
         }
     }
 }
