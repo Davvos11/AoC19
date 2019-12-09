@@ -15,14 +15,12 @@ public class getIntersection {
         File input = new File(url.getPath());
         BufferedReader br;
         String wire1 = null; String wire2 = null;
-        {
-            try {
-                br = new BufferedReader(new FileReader(input));
-                wire1 = br.readLine();
-                wire2 = br.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            br = new BufferedReader(new FileReader(input));
+            wire1 = br.readLine();
+            wire2 = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         String[] wire1Path = wire1.split(",");
