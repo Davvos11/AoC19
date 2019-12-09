@@ -2,10 +2,8 @@ package day03;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
@@ -14,7 +12,7 @@ import java.util.List;
 
 public class getIntersection {
     private ArrayList<String[]> setUp(){
-        URL url = getIntersection.class.getResource("inputTest");
+        URL url = getIntersection.class.getResource("input");
         File input = new File(url.getPath());
         BufferedReader br;
         String wire1 = null; String wire2 = null;
