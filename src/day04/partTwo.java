@@ -19,19 +19,30 @@ public class partTwo {
                 digits.add(digit);
             }
 
-            // Check decreasing and adjacent
+            // Check decreasing
             boolean decreasing = false;
-            boolean adjacent = false;
 
-            for (int j = 0; j < digits.size()-1; j++) {
+            for (int j = 0; j < digits.size() - 1; j++) {
                 if (digits.get(j) > digits.get(j + 1)) {
                     decreasing = true;
                     break;
                 }
-                if (digits.get(j).equals(digits.get(j + 1))){
-                    adjacent = true;
-                    if (j+2 != digits.size() && digits.get(j+1).equals(digits.get(j+2))) {
+            }
+
+            // Check adjacent
+            boolean adjacent = false;
+            int wrongNum = -1;
+
+            for (int j = 0; j < digits.size() - 1 && !decreasing; j++) {
+                if (digits.get(j).equals(digits.get(j + 1))) {
+                    if (!digits.get(j).equals(wrongNum)) {
+                        adjacent = true;
+                    }
+                    if (j + 2 != digits.size() && digits.get(j).equals(digits.get(j + 2))) {
                         adjacent = false;
+                        wrongNum = digits.get(j);
+                    }
+                    if (adjacent){
                         break;
                     }
                 }
