@@ -35,8 +35,20 @@ public class getIntersection {
 
     private int x = 0;
     private int y = 0;
+    private List<Integer> steps = new ArrayList<>();
+    private int step = -1;
 
-    private List<List<Integer>> parseWire(String a){
+    private void addStep(List<List<Integer>> XYs, List<List<Integer>> wireXY){
+        if (wireXY.size() < 1 || XYs.size() < 1){
+            step++;
+        }
+        else if (!XYs.get(XYs.size()-1).equals( wireXY.get(wireXY.size()-1) )){
+            step++;
+        }
+        steps.add(step);
+    }
+
+    private List<List<Integer>> parseWire(String a, List<List<Integer>> wireXY){
         String dir = a.substring(0,1);
         int len = Integer.parseInt(a.substring(1));
 
@@ -46,28 +58,33 @@ public class getIntersection {
             case "R":
                 for (int i = 0; i <= len; i++) {
                     XYs.add(newXY(x+i,y));
+                    addStep(XYs, wireXY);
                 }
                 x+=len;
                 break;
             case "L":
                 for (int i = 0; i <= len; i++) {
                     XYs.add(newXY(x-i,y));
+                    addStep(XYs, wireXY);
                 }
                 x-=len;
                 break;
             case "U":
                 for (int i = 0; i <= len; i++) {
                     XYs.add(newXY(x,y+i));
+                    addStep(XYs, wireXY);
                 }
                 y+=len;
                 break;
             case "D":
                 for (int i = 0; i <= len; i++) {
                     XYs.add(newXY(x,y-i));
+                    addStep(XYs, wireXY);
                 }
                 y-=len;
                 break;
         }
+
         return XYs;
     }
 
@@ -86,19 +103,38 @@ public class getIntersection {
 
         List<List<Integer>> wire1XY = new ArrayList<>();
         for (String a : wire1){
-            wire1XY.addAll(p.parseWire(a));
+            wire1XY.addAll(p.parseWire(a,wire1XY));
         }
+
+        List<Integer> steps1 = p.steps;
         p.x = 0;
         p.y = 0;
+        p.step = 0;
+        p.steps = new ArrayList<>();
+
         List<List<Integer>> wire2XY = new ArrayList<>();
         for (String a : wire2){
-            wire2XY.addAll(p.parseWire(a));
+            wire2XY.addAll(p.parseWire(a,wire2XY));
         }
 
+        List<Integer> steps2 = p.steps;
+
+//        System.out.println(wire1XY);
+//        System.out.println(steps1);
         System.out.println("Parsed wires, comparing paths...");
 
-        List<List<Integer>> intersects = new ArrayList<>(wire1XY);
-        intersects.retainAll(wire2XY);
+        List<List<Integer>> intersects = new ArrayList<>();
+        for (List<Integer> xy : wire1XY) {
+            if (wire2XY.contains(xy)){
+                List<Integer> res = new ArrayList<>();
+                res.add(xy.get(0));
+                res.add(xy.get(1));
+                res.add(steps1.get( wire1XY.indexOf(xy) ));
+                res.add(steps2.get( wire2XY.indexOf(xy) ));
+
+                intersects.add(res);
+            }
+        }
 
         System.out.println(intersects);
         try {
