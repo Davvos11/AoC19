@@ -109,7 +109,7 @@ public class getIntersection {
         List<Integer> steps1 = p.steps;
         p.x = 0;
         p.y = 0;
-        p.step = 0;
+        p.step = -1;
         p.steps = new ArrayList<>();
 
         List<List<Integer>> wire2XY = new ArrayList<>();
