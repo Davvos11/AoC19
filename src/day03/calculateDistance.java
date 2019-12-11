@@ -36,6 +36,17 @@ public class calculateDistance {
             }
         }
 
-        System.out.println(closest);
+        System.out.println("closest intersection: "+closest);
+
+        int leastSteps = -1;
+        for (List<Integer> i : intersects){
+            int steps = i.get(2) + i.get(3);
+            System.out.println(i.get(2)+"+"+i.get(3)+"="+steps);
+            if (steps < leastSteps || leastSteps == -1){
+                leastSteps = steps;
+            }
+        }
+
+        System.out.println("least combined steps: "+leastSteps);
     }
 }
