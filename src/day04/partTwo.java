@@ -22,15 +22,20 @@ public class partTwo {
             // Check decreasing and adjacent
             boolean decreasing = false;
             boolean adjacent = false;
+
             for (int j = 0; j < digits.size()-1; j++) {
                 if (digits.get(j) > digits.get(j + 1)) {
                     decreasing = true;
+                    break;
                 }
                 if (digits.get(j).equals(digits.get(j + 1))){
                     adjacent = true;
+                    if (j+2 != digits.size() && digits.get(j+1).equals(digits.get(j+2))) {
+                        adjacent = false;
+                        break;
+                    }
                 }
             }
-
             if (!decreasing && adjacent){
                 possiblePasswords.add(i);
             }
